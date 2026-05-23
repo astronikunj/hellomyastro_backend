@@ -12,6 +12,11 @@ const {
   getBanners, createBanner, updateBanner, deleteBanner,
   getReports, getRevenue,
 } = require('../controllers/adminController');
+const { createSkill, updateSkill, deleteSkill } = require('../controllers/skillController');
+const { createGift, updateGift, deleteGift } = require('../controllers/giftController');
+const { createBlog, updateBlog, deleteBlog } = require('../controllers/blogController');
+const { getCoupons, createCoupon, deleteCoupon } = require('../controllers/couponController');
+const { getAllWithdrawals, updateWithdrawalStatus } = require('../controllers/withdrawController');
 
 // All admin routes require protect + adminOnly
 router.use(protect, adminOnly);
@@ -36,5 +41,29 @@ router.delete('/banners/:id', deleteBanner);
 
 // Reports
 router.get('/reports', getReports);
+
+// Skill management
+router.post('/skills', createSkill);
+router.put('/skills/:id', updateSkill);
+router.delete('/skills/:id', deleteSkill);
+
+// Gift management
+router.post('/gifts', createGift);
+router.put('/gifts/:id', updateGift);
+router.delete('/gifts/:id', deleteGift);
+
+// Blog management
+router.post('/blogs', createBlog);
+router.put('/blogs/:id', updateBlog);
+router.delete('/blogs/:id', deleteBlog);
+
+// Coupon management
+router.get('/coupons', getCoupons);
+router.post('/coupons', createCoupon);
+router.delete('/coupons/:id', deleteCoupon);
+
+// Withdrawal management
+router.get('/withdrawals', getAllWithdrawals);
+router.put('/withdrawals/:id/status', updateWithdrawalStatus);
 
 module.exports = router;

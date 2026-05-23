@@ -10,6 +10,8 @@ const {
   listAstrologers, getAstrologerById,
   updateStatus, setSchedule, getEarnings, uploadAvatar,
 } = require('../controllers/astrologerController');
+const { addStory } = require('../controllers/storyController');
+const { requestWithdrawal, getWithdrawalHistory } = require('../controllers/withdrawController');
 
 // Public routes
 router.get('/', listAstrologers);
@@ -23,5 +25,12 @@ router.put('/status', protect, astrologerOnly, updateStatus);
 router.post('/schedule', protect, astrologerOnly, setSchedule);
 router.get('/earnings', protect, astrologerOnly, getEarnings);
 router.post('/upload-avatar', protect, astrologerOnly, uploadProfileImage, handleUploadError, uploadAvatar);
+
+// Story management
+router.post('/stories', protect, astrologerOnly, uploadProfileImage, handleUploadError, addStory);
+
+// Withdrawal management
+router.post('/withdraw', protect, astrologerOnly, requestWithdrawal);
+router.get('/withdraw/history', protect, astrologerOnly, getWithdrawalHistory);
 
 module.exports = router;

@@ -22,6 +22,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const kundliRoutes = require('./routes/kundliRoutes');
+const commonRoutes = require('./routes/commonRoutes');
 
 // Import error handlers
 const { errorMiddleware, notFoundMiddleware } = require('./middleware/errorMiddleware');
@@ -142,6 +143,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/kundli', kundliRoutes);
+app.use('/api/common', commonRoutes);
 
 // ===========================================================
 // ERROR HANDLING

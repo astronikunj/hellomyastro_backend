@@ -21,6 +21,13 @@ const CallHistory = require('./CallHistory');
 const Schedule = require('./Schedule');
 const Banner = require('./Banner');
 const Report = require('./Report');
+const Skill = require('./Skill');
+const Gift = require('./Gift');
+const AstrologerCategory = require('./AstrologerCategory');
+const Blog = require('./Blog');
+const Coupon = require('./Coupon');
+const WithdrawRequest = require('./WithdrawRequest');
+const AstrologerStory = require('./AstrologerStory');
 
 // ==============================================================
 // ASSOCIATIONS
@@ -29,6 +36,22 @@ const Report = require('./Report');
 // --- User <-> Astrologer (One-to-One) ---
 User.hasOne(Astrologer, { foreignKey: 'userId', as: 'astrologerProfile' });
 Astrologer.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// --- Astrologer <-> Skill (Many-to-Many or fields) ---
+// Note: Laravel used comma-separated strings for skills in Astrologer model.
+// For Node.js, we could use a junction table if needed, but for now we follow the existing pattern or define associations if they exist.
+
+// --- Astrologer <-> AstrologerCategory (Many-to-One) ---
+AstrologerCategory.hasMany(Astrologer, { foreignKey: 'astrologerCategoryId', as: 'astrologers' });
+Astrologer.belongsTo(AstrologerCategory, { foreignKey: 'astrologerCategoryId', as: 'category' });
+
+// --- Astrologer <-> WithdrawRequest (One-to-Many) ---
+Astrologer.hasMany(WithdrawRequest, { foreignKey: 'astrologerId', as: 'withdrawRequests' });
+WithdrawRequest.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
+
+// --- Astrologer <-> AstrologerStory (One-to-Many) ---
+Astrologer.hasMany(AstrologerStory, { foreignKey: 'astrologerId', as: 'stories' });
+AstrologerStory.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
 
 // --- User <-> Wallet (One-to-One) ---
 User.hasOne(Wallet, { foreignKey: 'userId', as: 'wallet' });
@@ -139,4 +162,11 @@ module.exports = {
   Schedule,
   Banner,
   Report,
+  Skill,
+  Gift,
+  AstrologerCategory,
+  Blog,
+  Coupon,
+  WithdrawRequest,
+  AstrologerStory,
 };
