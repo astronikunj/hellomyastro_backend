@@ -41,6 +41,17 @@ const OrderAddress = require('./OrderAddress');
 const OrderRequest = require('./OrderRequest');
 const ProductDetail = require('./ProductDetail');
 const WaitList = require('./WaitList');
+const Language = require('./Language');
+const MaritalStatus = require('./MaritalStatus');
+const ReportType = require('./ReportType');
+const HelpSupport = require('./HelpSupport');
+const HelpSupportQuestion = require('./HelpSupportQuestion');
+const LiveAstro = require('./LiveAstro');
+const LiveChat = require('./LiveChat');
+const AstrologerAssistant = require('./AstrologerAssistant');
+const Ticket = require('./Ticket');
+const AstrologyVideo = require('./AstrologyVideo');
+const Popup = require('./Popup');
 
 // ==============================================================
 // ASSOCIATIONS
@@ -202,6 +213,27 @@ WaitList.belongsTo(User, { foreignKey: 'userId', as: 'user' });
 Astrologer.hasMany(WaitList, { foreignKey: 'astrologerId', as: 'waitlists' });
 WaitList.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
 
+// --- Help & Support Associations ---
+HelpSupport.hasMany(HelpSupportQuestion, { foreignKey: 'helpSupportId', as: 'questions' });
+HelpSupportQuestion.belongsTo(HelpSupport, { foreignKey: 'helpSupportId', as: 'category' });
+
+// --- Live & Assistant Associations ---
+Astrologer.hasMany(LiveAstro, { foreignKey: 'astrologerId', as: 'liveSessions' });
+LiveAstro.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
+
+Astrologer.hasMany(AstrologerAssistant, { foreignKey: 'astrologerId', as: 'assistants' });
+AstrologerAssistant.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
+
+User.hasMany(LiveChat, { foreignKey: 'userId', as: 'liveChats' });
+LiveChat.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+// --- Ticket Associations ---
+User.hasMany(Ticket, { foreignKey: 'userId', as: 'tickets' });
+Ticket.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+HelpSupport.hasMany(Ticket, { foreignKey: 'helpSupportId', as: 'tickets' });
+Ticket.belongsTo(HelpSupport, { foreignKey: 'helpSupportId', as: 'supportCategory' });
+
 module.exports = {
   sequelize,
   User,
@@ -237,4 +269,15 @@ module.exports = {
   OrderRequest,
   ProductDetail,
   WaitList,
+  Language,
+  MaritalStatus,
+  ReportType,
+  HelpSupport,
+  HelpSupportQuestion,
+  LiveAstro,
+  LiveChat,
+  AstrologerAssistant,
+  Ticket,
+  AstrologyVideo,
+  Popup,
 };

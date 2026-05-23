@@ -26,6 +26,9 @@ const horoscopeRoutes = require('./routes/horoscopeRoutes');
 const astromallRoutes = require('./routes/astromallRoutes');
 const waitlistRoutes = require('./routes/waitlistRoutes');
 const followerRoutes = require('./routes/followerRoutes');
+const liveRoutes = require('./routes/liveRoutes');
+const assistantRoutes = require('./routes/assistantRoutes');
+const ticketRoutes = require('./routes/ticketRoutes');
 const commonRoutes = require('./routes/commonRoutes');
 
 // Import error handlers
@@ -151,6 +154,9 @@ app.use('/api/horoscope', horoscopeRoutes);
 app.use('/api/astromall', astromallRoutes);
 app.use('/api/waitlist', waitlistRoutes);
 app.use('/api/follower', followerRoutes);
+app.use('/api/live', liveRoutes);
+app.use('/api/assistant', assistantRoutes);
+app.use('/api/ticket', ticketRoutes);
 app.use('/api/common', commonRoutes);
 
 // ===========================================================
