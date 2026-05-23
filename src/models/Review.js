@@ -16,15 +16,19 @@ const Review = sequelize.define('Review', {
   },
   astrologerId: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
+    allowNull: true,
     references: { model: 'astrologers', key: 'id' },
     onDelete: 'CASCADE',
   },
   bookingId: {
     type: DataTypes.INTEGER.UNSIGNED,
-    allowNull: false,
+    allowNull: true,
     unique: true,
     references: { model: 'bookings', key: 'id' },
+  },
+  astromallProductId: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
   },
   rating: {
     type: DataTypes.TINYINT.UNSIGNED,

@@ -58,6 +58,15 @@ const MAX_LIMIT = 100;
 // OTP expiry in minutes
 const OTP_EXPIRY_MINUTES = 10;
 
+// Kundli PDF Price
+const KUNDLI_PDF_PRICE = 50; // Example price, adjust as needed
+
+const HOROSCOPE_TYPES = {
+  DAILY: 1,
+  WEEKLY: 2,
+  YEARLY: 3,
+};
+
 module.exports = {
   ROLES,
   BOOKING_STATUS,
@@ -70,4 +79,6 @@ module.exports = {
   DEFAULT_LIMIT,
   MAX_LIMIT,
   OTP_EXPIRY_MINUTES,
+  KUNDLI_PDF_PRICE,
+  HOROSCOPE_TYPES,
 };

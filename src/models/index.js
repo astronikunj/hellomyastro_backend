@@ -28,6 +28,18 @@ const Blog = require('./Blog');
 const Coupon = require('./Coupon');
 const WithdrawRequest = require('./WithdrawRequest');
 const AstrologerStory = require('./AstrologerStory');
+const Kundli = require('./Kundli');
+const KundaliMatching = require('./KundaliMatching');
+const HoroscopeSign = require('./HoroscopeSign');
+const SystemFlag = require('./SystemFlag');
+const Horoscope = require('./Horoscope');
+const MstControl = require('./MstControl');
+const HoroscopeFeedback = require('./HoroscopeFeedback');
+const AstromallProduct = require('./AstromallProduct');
+const ProductCategory = require('./ProductCategory');
+const OrderAddress = require('./OrderAddress');
+const OrderRequest = require('./OrderRequest');
+const ProductDetail = require('./ProductDetail');
 
 // ==============================================================
 // ASSOCIATIONS
@@ -147,6 +159,42 @@ Report.belongsTo(User, { foreignKey: 'reportedBy', as: 'reporter' });
 User.hasMany(Report, { foreignKey: 'reportedUser', as: 'reportsReceived' });
 Report.belongsTo(User, { foreignKey: 'reportedUser', as: 'reportedUserDetails' });
 
+// --- User <-> Kundli (One-to-Many) ---
+User.hasMany(Kundli, { foreignKey: 'createdBy', as: 'kundlis' });
+Kundli.belongsTo(User, { foreignKey: 'createdBy', as: 'creator' });
+
+// --- User <-> KundaliMatching (One-to-Many) ---
+User.hasMany(KundaliMatching, { foreignKey: 'createdBy', as: 'kundliMatchings' });
+KundaliMatching.belongsTo(User, { foreignKey: 'createdBy', as: 'matchCreator' });
+
+// --- Astromall Associations ---
+ProductCategory.hasMany(AstromallProduct, { foreignKey: 'productCategoryId', as: 'products' });
+AstromallProduct.belongsTo(ProductCategory, { foreignKey: 'productCategoryId', as: 'category' });
+
+User.hasMany(OrderAddress, { foreignKey: 'userId', as: 'addresses' });
+OrderAddress.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+User.hasMany(OrderRequest, { foreignKey: 'userId', as: 'orders' });
+OrderRequest.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+AstromallProduct.hasMany(OrderRequest, { foreignKey: 'productId', as: 'orders' });
+OrderRequest.belongsTo(AstromallProduct, { foreignKey: 'productId', as: 'product' });
+
+AstromallProduct.hasMany(ProductDetail, { foreignKey: 'astromallProductId', as: 'details' });
+ProductDetail.belongsTo(AstromallProduct, { foreignKey: 'astromallProductId', as: 'product' });
+
+AstromallProduct.hasMany(Review, { foreignKey: 'astromallProductId', as: 'productReviews' });
+Review.belongsTo(AstromallProduct, { foreignKey: 'astromallProductId', as: 'product' });
+
+ProductCategory.hasMany(OrderRequest, { foreignKey: 'productCategoryId', as: 'orders' });
+OrderRequest.belongsTo(ProductCategory, { foreignKey: 'productCategoryId', as: 'category' });
+
+OrderAddress.hasMany(OrderRequest, { foreignKey: 'orderAddressId', as: 'orders' });
+OrderRequest.belongsTo(OrderAddress, { foreignKey: 'orderAddressId', as: 'address' });
+
+Astrologer.hasMany(OrderRequest, { foreignKey: 'astrologerId', as: 'orders' });
+OrderRequest.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
+
 module.exports = {
   sequelize,
   User,
@@ -169,4 +217,16 @@ module.exports = {
   Coupon,
   WithdrawRequest,
   AstrologerStory,
+  Kundli,
+  KundaliMatching,
+  HoroscopeSign,
+  SystemFlag,
+  Horoscope,
+  MstControl,
+  HoroscopeFeedback,
+  AstromallProduct,
+  ProductCategory,
+  OrderAddress,
+  OrderRequest,
+  ProductDetail,
 };
