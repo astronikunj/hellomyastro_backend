@@ -24,6 +24,8 @@ const adminRoutes = require('./routes/adminRoutes');
 const kundliRoutes = require('./routes/kundliRoutes');
 const horoscopeRoutes = require('./routes/horoscopeRoutes');
 const astromallRoutes = require('./routes/astromallRoutes');
+const waitlistRoutes = require('./routes/waitlistRoutes');
+const followerRoutes = require('./routes/followerRoutes');
 const commonRoutes = require('./routes/commonRoutes');
 
 // Import error handlers
@@ -147,6 +149,8 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/kundli', kundliRoutes);
 app.use('/api/horoscope', horoscopeRoutes);
 app.use('/api/astromall', astromallRoutes);
+app.use('/api/waitlist', waitlistRoutes);
+app.use('/api/follower', followerRoutes);
 app.use('/api/common', commonRoutes);
 
 // ===========================================================

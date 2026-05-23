@@ -40,6 +40,7 @@ const ProductCategory = require('./ProductCategory');
 const OrderAddress = require('./OrderAddress');
 const OrderRequest = require('./OrderRequest');
 const ProductDetail = require('./ProductDetail');
+const WaitList = require('./WaitList');
 
 // ==============================================================
 // ASSOCIATIONS
@@ -195,6 +196,12 @@ OrderRequest.belongsTo(OrderAddress, { foreignKey: 'orderAddressId', as: 'addres
 Astrologer.hasMany(OrderRequest, { foreignKey: 'astrologerId', as: 'orders' });
 OrderRequest.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
 
+User.hasMany(WaitList, { foreignKey: 'userId', as: 'waitlists' });
+WaitList.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+
+Astrologer.hasMany(WaitList, { foreignKey: 'astrologerId', as: 'waitlists' });
+WaitList.belongsTo(Astrologer, { foreignKey: 'astrologerId', as: 'astrologer' });
+
 module.exports = {
   sequelize,
   User,
@@ -229,4 +236,5 @@ module.exports = {
   OrderAddress,
   OrderRequest,
   ProductDetail,
+  WaitList,
 };
